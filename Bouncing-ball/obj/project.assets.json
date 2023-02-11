@@ -8,19 +8,19 @@
     "net7.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {}
+    "C:\\Users\\lkasz\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Desktop\\Projects\\bouncing-ball\\Bouncing-ball\\Bouncing-ball.csproj",
+      "projectUniqueName": "D:\\_Project\\bouncing-ball\\Bouncing-ball\\Bouncing-ball.csproj",
       "projectName": "Bouncing-ball",
-      "projectPath": "C:\\Users\\admin\\Desktop\\Projects\\bouncing-ball\\Bouncing-ball\\Bouncing-ball.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Desktop\\Projects\\bouncing-ball\\Bouncing-ball\\obj\\",
+      "projectPath": "D:\\_Project\\bouncing-ball\\Bouncing-ball\\Bouncing-ball.csproj",
+      "packagesPath": "C:\\Users\\lkasz\\.nuget\\packages\\",
+      "outputPath": "D:\\_Project\\bouncing-ball\\Bouncing-ball\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\lkasz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
