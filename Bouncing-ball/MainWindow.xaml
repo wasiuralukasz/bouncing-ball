@@ -5,16 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bouncing_ball"
         mc:Ignorable="d"
-        Title="Bouncing Ball" Height="760" Width="1280">
+        Title="Bouncing Ball" Height="760" Width="1280" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="33*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
         <Canvas Grid.Column="0" Name="MyCanvas"  Width="1000" Height="600" Margin="28,72,28,72" Background="#FFF1F1F1">
-            <Rectangle Name="Ball" Height="50" Width="46" Fill="#FF5F5F5F" RadiusX="50" RadiusY="50" Canvas.Left="1" Canvas.Top="1"/>
         </Canvas>
-        <Button Grid.Column="1" Name="StartButton" Content="Start" HorizontalAlignment="Left" Height="30" Margin="53,642,0,0" VerticalAlignment="Top" Width="100" Click="StartButton_Click"/>
-        <Button Grid.Column="1" Name="StopButton" Content="Stop" HorizontalAlignment="Left" Height="30" Margin="53,598,0,0" VerticalAlignment="Top" Width="100" Click="StopButton_Click"/>
     </Grid>
 </Window>

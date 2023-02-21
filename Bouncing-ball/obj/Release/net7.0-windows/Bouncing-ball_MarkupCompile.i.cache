@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-D:\_Project\bouncing-ball\Bouncing-ball\obj\Release\net7.0-windows\
+C:\Users\admin\Documents\GitHub\bouncing-ball\Bouncing-ball\obj\Release\net7.0-windows\
 Bouncing_ball
 none
 false
 TRACE;RELEASE;NET;NET7_0;NETCOREAPP
-D:\_Project\bouncing-ball\Bouncing-ball\App.xaml
+C:\Users\admin\Documents\GitHub\bouncing-ball\Bouncing-ball\App.xaml
 11407045341
 
-5-188120443
+6-1097991692
 1981911467256
 MainWindow.xaml;
 

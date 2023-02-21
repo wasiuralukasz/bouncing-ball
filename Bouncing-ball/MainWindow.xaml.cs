@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,44 +17,77 @@ using System.Windows.Threading;
 
 namespace Bouncing_ball
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        double moveX = 0.1, moveY = 0.1;
-        DispatcherTimer timer = new DispatcherTimer();
+        private Random random;
+        private double move = 0.1;
+
+        private List<Ball> bouncingBall;
+
+        public bool isStop = false;
+        private Thread BallThread;
+        private delegate void MoveBallHandler(Ball ball);
 
         public MainWindow()
         {
             InitializeComponent();
-            timer.Tick += timer_Tick;
-            timer.Interval = TimeSpan.FromMicroseconds(500);
+
+            this.bouncingBall = new List<Ball>();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Canvas.SetLeft(Ball, Canvas.GetLeft(Ball) + moveX);
-            Canvas.SetTop(Ball, Canvas.GetTop(Ball) + moveY);
+            this.random = new Random();
+            Ball ball = new Ball(this.random);
+            this.bouncingBall.Add(ball);
+            this.MyCanvas.Children.Add(ball.Circle);
+            this.BallThread = new Thread(BallThreadProc);
+            this.BallThread.Start();
+        }
 
-            if(Canvas.GetLeft(Ball) > MyCanvas.ActualWidth - Ball.Width || Canvas.GetLeft(Ball) <= 0)
+        private void BallThreadProc()
+        {
+            MoveBallHandler handler = new MoveBallHandler(this.MoveBall);
+
+            while(!isStop)
             {
-                moveX *= -1;
+                Monitor.Enter(this);
+                Dispatcher.BeginInvoke(handler, bouncingBall[0]);
+                Monitor.Exit(this);
+                Thread.Sleep(1);
             }
-            if (Canvas.GetTop(Ball) > MyCanvas.ActualHeight - Ball.Height || Canvas.GetTop(Ball) <= 0)
+        }
+
+        private void MoveBall(Ball ball)
+        {
+            ball.LeftPosition += ball.Direction.X * move;
+            ball.TopPosition += ball.Direction.Y * move;
+
+            CheckWall(ball);
+        }
+
+        private void CheckWall(Ball ball)
+        {
+            //Top wall
+            if( ball.TopPosition < 0)
             {
-                moveY *= -1;
+                ball.Direction = new Vector(ball.Direction.X, -ball.Direction.Y);
             }
-        }
-
-        public void StartButton_Click(object sender, RoutedEventArgs e)
-        {
-            timer.Start();
-        }
-
-        private void StopButton_Click(object sender, RoutedEventArgs e)
-        {
-            timer.Stop();
+            //Bottom wall
+            else if(ball.TopPosition > MyCanvas.ActualHeight - ball.Radius*2)
+            {
+                ball.Direction = new Vector(ball.Direction.X, -ball.Direction.Y);
+            }
+            //Right wall
+            else if (ball.LeftPosition < 0)
+            {
+                ball.Direction = new Vector(-ball.Direction.X, ball.Direction.Y);
+            }
+            //Left wall
+            else if (ball.LeftPosition > MyCanvas.ActualWidth - ball.Radius * 2)
+            {
+                ball.Direction = new Vector(-ball.Direction.X, ball.Direction.Y);
+            }
         }
     }
 }
