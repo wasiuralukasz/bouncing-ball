@@ -9,9 +9,31 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="33*"/>
-            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
         <Canvas Grid.Column="0" Name="MyCanvas"  Width="1000" Height="600" Margin="28,72,28,72" Background="#FFF1F1F1">
+            <Border Name="CanvasBorder" BorderBrush="Black" BorderThickness="1" Height="600" Width="1000" Visibility="Hidden"/>
         </Canvas>
+        <Label Grid.Column="1" Content="Szerokość okna:" HorizontalAlignment="Left" Height="26" Margin="10,74,0,0" VerticalAlignment="Top" Width="124" Padding="0,5,5,5" Grid.IsSharedSizeScope="True"/>
+        <TextBox Name="CanvasWidthInput" Grid.Column="1" HorizontalAlignment="Left" Margin="10,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="25"/>
+        <Label Grid.Column="1" Content="Wysokość okna:" HorizontalAlignment="Left" Height="26" Margin="10,135,0,0" VerticalAlignment="Top" Width="124" Padding="0,5,5,5" Grid.IsSharedSizeScope="True"/>
+        <TextBox Name="CanvasHeightInput" Grid.Column="1" HorizontalAlignment="Left" Margin="10,166,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="150" Height="24"/>
+        <Label Grid.Column="1" Content="Kolor tła:" HorizontalAlignment="Left" Height="26" Margin="10,195,0,0" VerticalAlignment="Top" Width="124" Padding="0,5,5,5" Grid.IsSharedSizeScope="True"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Width="150">
+            <ComboBoxItem IsSelected="true">Biały</ComboBoxItem>
+            <ComboBoxItem>Szary</ComboBoxItem>
+        </ComboBox>
+        <Label Grid.Column="1" Content="Kolor kuli:" HorizontalAlignment="Left" Height="27" Margin="10,252,0,0" VerticalAlignment="Top" Width="124" Padding="0,5,5,5" Grid.IsSharedSizeScope="True"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Margin="10,283,0,0" VerticalAlignment="Top" Width="150">
+            <ComboBoxItem IsSelected="true">Czarny</ComboBoxItem>
+            <ComboBoxItem>Niebieski</ComboBoxItem>
+            <ComboBoxItem>Czerwony</ComboBoxItem>
+        </ComboBox>
+        <Label Grid.Column="1" Content="Prędkość kuli:" HorizontalAlignment="Left" Height="26" Margin="10,311,0,0" VerticalAlignment="Top" Width="124" Padding="0,5,5,5" Grid.IsSharedSizeScope="True"/>
+        <Slider Name="BallSpeedSlider" Grid.Column="1" HorizontalAlignment="Left" Margin="10,341,0,0" VerticalAlignment="Top" Width="150" Value="50" Minimum="1" Maximum="200" IsSnapToTickEnabled="True" TickFrequency="1"/>
+        <Button Grid.Column="1" Content="Zastosuj" HorizontalAlignment="Left" Margin="10,571,0,0" VerticalAlignment="Top" Click="ApplyButton_Click" Width="150" Height="25"/>
+        <Button Grid.Column="1" Content="Start" HorizontalAlignment="Left" Margin="10,610,0,0" VerticalAlignment="Top" Click="StartButton_Click" Width="150" Height="25" Background="#FF53E283"/>
+        <Button Grid.Column="1" Content="Stop" HorizontalAlignment="Left" Margin="10,647,0,0" VerticalAlignment="Top" Click="StopButton_Click" Width="150" Height="25" Background="#FFF56868"/>
+        <CheckBox Name="CanvasBorderCheckBox" Grid.Column="1" Content="Obramowanie obszaru&#xD;&#xA;roboczego" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Height="32"/>
     </Grid>
 </Window>

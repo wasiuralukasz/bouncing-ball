@@ -21,10 +21,11 @@ namespace Bouncing_ball
     {
         private Random random;
         private double move = 0.1;
+        private int defaultSpeed = 1;
 
         private List<Ball> bouncingBall;
 
-        public bool isStop = false;
+        public bool isStop;
         private Thread BallThread;
         private delegate void MoveBallHandler(Ball ball);
 
@@ -41,11 +42,12 @@ namespace Bouncing_ball
             Ball ball = new Ball(this.random);
             this.bouncingBall.Add(ball);
             this.MyCanvas.Children.Add(ball.Circle);
-            this.BallThread = new Thread(BallThreadProc);
+            this.BallThread = new Thread(() => BallThreadProc(this.defaultSpeed));
+            this.isStop = false;
             this.BallThread.Start();
         }
 
-        private void BallThreadProc()
+        private void BallThreadProc(int speed)
         {
             MoveBallHandler handler = new MoveBallHandler(this.MoveBall);
 
@@ -54,7 +56,7 @@ namespace Bouncing_ball
                 Monitor.Enter(this);
                 Dispatcher.BeginInvoke(handler, bouncingBall[0]);
                 Monitor.Exit(this);
-                Thread.Sleep(1);
+                Thread.Sleep(speed);
             }
         }
 
@@ -88,6 +90,54 @@ namespace Bouncing_ball
             {
                 ball.Direction = new Vector(-ball.Direction.X, ball.Direction.Y);
             }
+        }
+
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO, Generate new ball in 
+            bouncingBall[0].Circle.Fill = Brushes.Blue;
+            if(!(CanvasHeightInput.Text == ""))
+            {
+                MyCanvas.Height = double.Parse(CanvasHeightInput.Text);
+                CanvasBorder.Height = double.Parse(CanvasHeightInput.Text);
+            }
+            else if(!(CanvasWidthInput.Text == ""))
+            {
+                MyCanvas.Width = double.Parse(CanvasWidthInput.Text);
+                CanvasBorder.Width = double.Parse(CanvasWidthInput.Text);
+            }
+
+
+            //Check CheckBox, if checked border is visible.
+            if (CanvasBorderCheckBox.IsChecked == true)
+            {
+                CanvasBorder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CanvasBorder.Visibility = Visibility.Hidden;
+            }
+
+
+            //Get value from slider and create new Thread with new speed.
+            int valueFromSlider = (int)(BallSpeedSlider.Value);
+            this.isStop = true;
+            this.BallThread.Join();
+            this.BallThread = new Thread(() => BallThreadProc(valueFromSlider));
+            this.isStop = false;
+            this.BallThread.Start();
+        }
+
+        private void StartButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.BallThread = new Thread(() => BallThreadProc(this.defaultSpeed));
+            this.isStop = false;
+            this.BallThread.Start();
+        }
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.isStop = true;
+            this.BallThread.Join();
         }
     }
 }

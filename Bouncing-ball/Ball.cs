@@ -25,7 +25,8 @@ namespace Bouncing_ball
         {
             //Setup ball
             this.circle = new Ellipse();
-            this.circle.Stroke = Brushes.Red;
+            this.circle.Name = "MyBall";
+            //this.circle.Stroke = Brushes.Red;
             this.circle.Fill = Brushes.Black;
             this.circle.Width= Radius * 2;
             this.circle.Height= Radius * 2;
@@ -37,6 +38,7 @@ namespace Bouncing_ball
             this.LeftPosition = rand.NextDouble() * ( 1000 - Radius) + Radius;
             this.TopPosition = rand.NextDouble() * ( 600 - Radius) + Radius;
 
+            
 
             //Direction
             this.direction= new Vector(rand.Next(-5, 5), rand.Next(-5, 5));
